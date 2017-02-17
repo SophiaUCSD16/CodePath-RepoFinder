@@ -22,7 +22,7 @@ class GithubRepo: CustomStringConvertible {
     var stars: Int?
     var forks: Int?
     var description_brief: String?
-    let imageURL: URL?
+    var imageURL: URL?
     
     // Initializes a GitHubRepo from a JSON dictionary
     init(jsonResult: NSDictionary) {
@@ -44,7 +44,7 @@ class GithubRepo: CustomStringConvertible {
             }
             if let ownerAvatarURL = owner["avatar_url"] as? String {
                 self.ownerAvatarURL = ownerAvatarURL
-                imageURL = URL(string: ownerAvatarURL)!
+                imageURL = URL.init(string: ownerAvatarURL)!
             }
         }
         

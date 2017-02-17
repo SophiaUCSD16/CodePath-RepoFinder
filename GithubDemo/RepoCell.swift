@@ -7,29 +7,25 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class RepoCell: UITableViewCell {
     
-    @IBOutlet weak var AvartarImageView: UIImageView!
-    
-    @IBOutlet weak var forkIcon: UIImageView!
-    @IBOutlet weak var starIcon: UIImageView!
-    
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var starLabel: UILabel!
-    @IBOutlet weak var forkLabel: UILabel!
-    @IBOutlet weak var ownerLabel: UILabel!
-    @IBOutlet weak var descirptionLabel: UILabel!
+    @IBOutlet var nameLabel: UILabel!
+    @IBOutlet var AvartarImageView: UIImageView!
+    @IBOutlet var ownerLabel: UILabel!
+    //@IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var starLabel: UILabel!
+    @IBOutlet var forkLabel: UILabel!
     
     var repoData: GithubRepo! {
         didSet{
             nameLabel.text = repoData.name
             AvartarImageView.setImageWith(repoData.imageURL!)
-            starLabel.text = repoData.stars as! String
-            forkLabel.text = repoData.forks as! String
+            starLabel.text = "\(repoData.stars!)"  != nil ?  String(repoData.stars!) : ""
+            forkLabel.text = "\(repoData.forks!)"  != nil ?  String(repoData.forks!) : ""
             ownerLabel.text = repoData.ownerHandle
-            descirptionLabel.text = repoData.description_brief
-            
+            //descriptionLabel.text = repoData.description_brief
         }
     }
     
