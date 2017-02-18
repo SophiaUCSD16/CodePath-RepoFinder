@@ -35,6 +35,8 @@ class RepoResultsViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
 
     }
 

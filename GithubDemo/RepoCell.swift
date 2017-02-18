@@ -14,18 +14,18 @@ class RepoCell: UITableViewCell {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var AvartarImageView: UIImageView!
     @IBOutlet var ownerLabel: UILabel!
-    //@IBOutlet var descriptionLabel: UILabel!
+    @IBOutlet var descriptionLabel: UILabel!
     @IBOutlet var starLabel: UILabel!
     @IBOutlet var forkLabel: UILabel!
     
     var repoData: GithubRepo! {
-        didSet{
+       didSet{
             nameLabel.text = repoData.name
             AvartarImageView.setImageWith(repoData.imageURL!)
             starLabel.text = "\(repoData.stars!)"  != nil ?  String(repoData.stars!) : ""
             forkLabel.text = "\(repoData.forks!)"  != nil ?  String(repoData.forks!) : ""
             ownerLabel.text = repoData.ownerHandle
-            //descriptionLabel.text = repoData.description_brief
+            descriptionLabel.text = repoData.description_brief
         }
     }
     
