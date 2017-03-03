@@ -29,6 +29,7 @@ class RepoResultsViewController: UIViewController, SettingsPresentingViewControl
 
         // Add SearchBar to the NavigationBar
         searchBar.sizeToFit()
+        searchBar.enablesReturnKeyAutomatically = false
         navigationItem.titleView = searchBar
 
         // Perform the first search when the view controller first loads
@@ -50,9 +51,9 @@ class RepoResultsViewController: UIViewController, SettingsPresentingViewControl
         GithubRepo.fetchRepos(searchSettings, successCallback: { (newRepos: [GithubRepo]) -> Void in
 
             // Print the returned repositories to the output window
-            for repo in newRepos {
-                print(repo)
-            }
+//            for repo in newRepos {
+//                print(repo)
+//            }
             self.repos = newRepos
             self.tableView.reloadData()
 
@@ -115,10 +116,13 @@ extension RepoResultsViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        doSearch()
+
     }
 
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchSettings.searchString = searchBar.text
+        print(searchSettings.searchString)
         searchBar.resignFirstResponder()
         doSearch()
     }
