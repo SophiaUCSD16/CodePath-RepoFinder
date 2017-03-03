@@ -10,10 +10,11 @@ import UIKit
 import MBProgressHUD
 
 // Main ViewController
-class RepoResultsViewController: UIViewController {
+class RepoResultsViewController: UIViewController, SettingsPresentingViewControllerDelegate {
 
     var searchBar: UISearchBar!
     var searchSettings = GithubRepoSearchSettings()
+    
 
     @IBOutlet weak var tableView: UITableView!
     
@@ -60,6 +61,28 @@ class RepoResultsViewController: UIViewController {
                 print(error)
         })
     }
+    
+    
+    // prepare data for search Setting
+    // RepoResultsViewController.swift
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let navController = segue.destination as! UINavigationController
+        let vc = navController.topViewController as! SearchSettingsViewController
+        vc.settings = searchSettings
+        vc.delegate = self
+    }
+    
+    //Conform the RepoResultsViewController class to the SettingsPresentingViewControllerDelegate protocol
+    func didSaveSettings(settings: GithubRepoSearchSettings ) {
+        self.searchSettings = settings
+        doSearch()
+    }
+    
+    func didCancelSettings() {
+    }
+    
+
+    
 }
 
 extension RepoResultsViewController: UITableViewDataSource, UITableViewDelegate {
